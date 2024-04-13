@@ -22,6 +22,10 @@ const issueSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        notes: {
+            type: Array,
+            required: false,
+        }
     }, 
     {
         timestamps: true // Automatically add createdAt and updatedAt fields

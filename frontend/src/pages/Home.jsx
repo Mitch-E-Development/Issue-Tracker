@@ -40,34 +40,50 @@ const Home = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <table className='w-full border-separate border-spacing-2'>
-                   <thead>
-            <tr>
-              <th className='border border-slate-600 rounded-md'>ID</th>
-              <th className='border border-slate-600 rounded-md'>Status</th>
-              <th className='border border-slate-600 rounded-md'>Title</th>
-              <th className='border border-slate-600 rounded-md'>Author</th>
-              <th className='border border-slate-600 rounded-md'>Severity</th>
-              <th className='border border-slate-600 rounded-md'>Description</th>
-              <th className='border border-slate-600 rounded-md'>Created On</th>
-              <th className='border border-slate-600 rounded-md'>Modified On</th>
+        <div className="overflow-hidden border border-sky-400 rounded-xl">
+        <table className='w-full rounded-xl'>
+          <thead>
+            <tr className='bg-gray-200 border-b-2 border-b-sky-400'>
+              <th className='border border-sky-400 rounded-md p-2'>No.</th>
+              <th className='border border-sky-400 rounded-md p-2'>Number</th>
+              <th className='border border-sky-400 rounded-md p-2'>Title</th>
+              <th className='border border-sky-400 rounded-md p-2 max-md:hidden'>Author</th>
+              <th className='border border-sky-400 rounded-md p-2'>Severity</th>
+              <th className='border border-sky-400 rounded-md p-2'>Description</th>
+              <th className='border border-sky-400 rounded-md p-2'>Modified On</th>
+              <th className='border border-sky-400 rounded-md p-2'>Actions</th> 
             </tr>
           </thead>
           <tbody>
-            {issues.map((issue) => (
+            {issues.map((issue, index) => (
               <tr key={issue._id}>
-                <td className='border border-slate-600 rounded-md'>{issue._id}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.status}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.title}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.author}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.severity}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.description}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.createdAt}</td>
-                <td className='border border-slate-600 rounded-md'>{issue.updatedAt}</td>
+                 <td className='border border-sky-400 rounded-md text-center p-2'>
+                  {index + 1}
+                </td>
+                <td className='border border-sky-400 rounded-md text-center p-2'>{issue.status}</td>
+                <td className='border border-sky-400 rounded-md text-center p-2' >{issue.title}</td>
+                <td className='border border-sky-400 rounded-md text-center max-md:hidden p-2'>{issue.author}</td>
+                <td className='border border-sky-400 rounded-md text-center p-2'>{issue.severity}</td>
+                <td className='border border-sky-400 rounded-md text-center p-2'>{issue.description}</td>
+                <td className='border border-sky-400 rounded-md text-center p-2'>{new Date(issue.updatedAt).toLocaleDateString()}</td>
+                <td className='border border-sky-400 rounded-md text-center p-2'>
+                  <div className='flex justify-center gap-x-4'>
+                    <Link to={`/issues/details/${issue._id}\n`}>
+                      <BsInfoCircle className='text-2xl text-green-800' />
+                    </Link>
+                    <Link to={`/issues/edit/${issue._id}\n`}>
+                      <AiOutlineEdit className='text-2xl text-yellow-600' />
+                    </Link>
+                    <Link to={`/issues/delete/${issue._id}\n`}>
+                      <MdOutlineDelete className='text-2xl text-red-600' />
+                    </Link> 
+                  </div>          
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
       )}
     </div>
   );
