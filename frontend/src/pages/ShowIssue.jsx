@@ -16,15 +16,12 @@ const ShowIssue = () => {
     axios
       .get(`http://localhost:3000/issues/${id}`)
       .then((res) => {
-        // console.log(res.data.data)
         setIssue(res.data)
         setNotes(res.data.notes)
         setLoading(false);
-        // console.log(issue)
       })
       .catch((error) => {
         console.log(error);
-        // setLoading(false);
       });
   }, []);
 
@@ -63,21 +60,23 @@ const ShowIssue = () => {
             <span>{issue.description}</span>
           </div>
           <div className='my-4'>
-            <span className='text-xl mr-4 text-gray-500'>Created On</span>
-            <span>{new Date(issue.createdAt).toString()}</span>
+            <span className='text-xl mr-4 text-gray-500'>Created:</span>
+            <span>{new Date(issue.createdAt).toLocaleString()}</span>
           </div>
           <div className='my-4'>
-            <span className='text-xl mr-4 text-gray-500'>Last Update</span>
-            <span>{new Date(issue.updatedAt).toString()}</span>
+            <span className='text-xl mr-4 text-gray-500'>Updated:</span>
+            <span>{new Date(issue.updatedAt).toLocaleString()}</span>
           </div>
           <div className='my-4'>
             <span className='text-xl mr-4 text-gray-500'>Notes:</span>
-            {/* <span>{issue.notes}</span> */}
             <ul>
-              {issueNotes.map((note, index) => (
-                <li key={index}>{index + 1}. {note}</li>
-              ))}
-            </ul>
+            {issueNotes.map((note, index) => (
+              <li key={index} className='mt-5'>
+                <div>{index + 1}. {note}</div>
+                <hr />
+              </li>
+            ))}
+          </ul>
           </div>
         </div>
         

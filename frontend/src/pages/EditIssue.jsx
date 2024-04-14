@@ -3,9 +3,9 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const EditIssue = () => {
-
     const [status, setStatus] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -17,6 +17,7 @@ const EditIssue = () => {
 
     const navigate = useNavigate();
     const {id} = useParams();
+    const { enqueueSnackbar } = useSnackbar()
 
     useEffect(() => {
       setLoading(true);
@@ -29,7 +30,6 @@ const EditIssue = () => {
             setSeverity(res.data.severity);
             setDescription(res.data.description);
             setNotes(res.data.notes);
-
             setLoading(false);
         })
         .catch((error) => {
@@ -41,7 +41,7 @@ const EditIssue = () => {
     const handleAddNote = () => {
       if (newNote !== '') { // Check if the new note is not empty
         const updatedNotes = notes; // Create a copy of the existing notes array
-        updatedNotes.push(newNote); // Push the new note onto the copied array
+        updatedNotes.push(new Date().toLocaleString(0) + ': ' + newNote); // Push the new note onto the copied array
         setNotes(updatedNotes); // Set the updated array as the new state
         setNewNote('');
       }
@@ -62,11 +62,12 @@ const EditIssue = () => {
         .put(`http://localhost:3000/issues/${id}`, data)
         .then(() => {
           setLoading(false);
+          enqueueSnackbar('Issue Updated Successfully', {variant: 'success'})
           navigate('/');
         })
         .catch((error) => {
           setLoading(false);
-          alert('An error happened. Please check console.')
+          enqueueSnackbar('Error', {variant: 'error'});
           console.log(error.message);
         });
     };
@@ -139,11 +140,15 @@ const EditIssue = () => {
           </div>
           <div className='my-4'>
             <label className='text-xl mr-4 text-gray-500'>Notes:</label>
+            <ul>
             {notes.map((note, index) => (
-              <div key={index}>
-                <span>{index + 1}. {note}</span>
-              </div>
+              <li key={index} className='mt-5'>
+                {/* <div><b>{new Date(note.timestamp).toLocaleString()}</b></div> */}
+                <div>{index + 1}. {note}</div>
+                <hr />
+              </li>
             ))}
+            </ul>
           </div>
           <button className='p-2 bg-sky-300 m-8' onClick={handleSaveIssue}>
             Save New Issue

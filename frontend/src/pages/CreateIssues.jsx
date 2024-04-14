@@ -3,6 +3,7 @@ import BackButton from '../components/BackButton';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 
 const CreateIssues = () => {
@@ -15,6 +16,7 @@ const CreateIssues = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const { enqueueSnackbar }= useSnackbar();
 
   const handleSaveIssue = () => {
     const data = {
@@ -23,7 +25,7 @@ const CreateIssues = () => {
       author,
       severity,
       description,
-      notes
+      notes: new Date().toLocaleString() + ': ' + notes
     };
     setLoading(true);
 
@@ -31,10 +33,12 @@ const CreateIssues = () => {
       .post('http://localhost:3000/issues', data)
       .then(() => {
         setLoading(false);
+        enqueueSnackbar('Issue Created Successfully', {variant: 'success'});
         navigate('/');
       })
       .catch((error) => {
         setLoading(false)
+        enqueueSnackbar('Error', {variant: 'error'});
         console.log(error.message)
       });
   };
