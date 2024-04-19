@@ -32,26 +32,26 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="p-4 pb-20">
+    <div className="p-4 py-10">
       <SearchBar setSearch={setSearch} />
 
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl mb-4">Issues List</h1>
+      <div className="flex justify-between items-center px-5 pt-10">
+        <h1 className="text-3xl">Issues List</h1>
         <div className="flex justify-center items-center gap-x-4">
           <button
-            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+            className="text-white bg-purple-900 hover:bg-sky-600 px-4 py-1 rounded-lg"
             onClick={() => setShowType("table")}
           >
             Table View
           </button>
           <button
-            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+            className="text-white bg-purple-900 hover:bg-sky-600 px-4 py-1 rounded-lg"
             onClick={() => setShowType("card")}
           >
             Card View
           </button>
           <Link to="/issues/create">
-            <MdOutlineAddBox className="text-sky-800 text-4xl hover:bg-sky-600" />
+            <MdOutlineAddBox className="text-purple-900 text-4xl hover:text-sky-600" />
           </Link>
         </div>
       </div>

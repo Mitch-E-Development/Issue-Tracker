@@ -42,7 +42,7 @@ const EditIssue = () => {
     if (newNote !== "") {
       // Check if the new note is not empty
       const updatedNotes = notes; // Create a copy of the existing notes array
-      updatedNotes.push(new Date().toLocaleString(0) + ": " + newNote); // Push the new note onto the copied array
+      updatedNotes.push(newNote + " - " + new Date().toLocaleString()); // Push the new note onto the copied array
       setNotes(updatedNotes); // Set the updated array as the new state
       setNewNote("");
     }
@@ -79,23 +79,24 @@ const EditIssue = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="px-4 py-10">
       <BackButton />
-      <h1 className="text-3xl my-4">Edit Issue</h1>
+      <h1 className="text-3xl text-center my-4">Edit Issue</h1>
       {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+      <div className="flex flex-col border-2 border-purple-400 rounded-xl w-[75%] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Status:</label>
           <select
-            className="border border-black bg-white"
+            className="border border-gray-500 bg-white"
             value={status}
             onChange={(e) => {setStatus(e.target.value)}}
           >
             <option value="">Select Status</option>
             <option value="New">New</option>
+            <option value="Open">Open</option>
             <option value="Assigned">Assigned</option>
-            <option value="In Progress">In Progress</option>
             <option value="Resolved">Resolved</option>
+            <option value="Verified">Verified</option>
             <option value="Closed">Closed</option>
           </select>
         </div>
@@ -146,7 +147,7 @@ const EditIssue = () => {
             onChange={(e) => setNewNote([e.target.value])}
             className="border-2 border-gray-500 w-full"
           />
-          <button className="p-2 bg-sky-300 my-4" onClick={handleAddNote}>
+          <button className="text-white bg-purple-900 hover:bg-sky-600 rounded-lg p-2 my-4" onClick={handleAddNote}>
             Add Note
           </button>
         </div>
@@ -155,7 +156,6 @@ const EditIssue = () => {
           <ul>
             {notes.map((note, index) => (
               <li key={index} className="mt-5">
-                {/* <div><b>{new Date(note.timestamp).toLocaleString()}</b></div> */}
                 <div>
                   {index + 1}. {note}
                 </div>
@@ -164,7 +164,7 @@ const EditIssue = () => {
             ))}
           </ul>
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveIssue}>
+        <button className="text-white bg-purple-900 hover:bg-sky-600 rounded-lg p-2 m-8" onClick={handleSaveIssue}>
           Save New Issue
         </button>
       </div>

@@ -25,7 +25,7 @@ const CreateIssues = () => {
       author,
       severity,
       description,
-      notes: new Date().toLocaleString() + ': ' + notes
+      notes: notes + ' - ' + new Date().toLocaleString()
     };
     setLoading(true);
 
@@ -44,18 +44,18 @@ const CreateIssues = () => {
   };
 
   return (
-    <div className='p-4'>
+    <div className='px-4 py-10'>
       <BackButton />
-      <h1 className='text-3xl my-4'>Create Issue</h1>
+      <h1 className='text-3xl text-center my-4'>Create Issue</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
+      <div className='flex flex-col border-2 border-purple-400 rounded-xl w-[75%] p-4 mx-auto'>
         <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Title:</label>
           <input 
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='border-2 border-gray-500'  
+            className='border-2 border-gray-500 w-full'  
           />
         </div>
         <div className='my-4'>
@@ -64,7 +64,7 @@ const CreateIssues = () => {
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className='border-2 border-gray-500'  
+            className='border-2 border-gray-500 w-full'  
           />
         </div>
         <div className='my-4'>
@@ -75,7 +75,7 @@ const CreateIssues = () => {
             max={10}
             value={severity}
             onChange={(e) => setSeverity(e.target.value)}
-            className='border-2 border-gray-500'  
+            className='border-2 border-gray-500 w-full'  
           />
         </div>
         <div className='my-4'>
@@ -84,19 +84,19 @@ const CreateIssues = () => {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className='border-2 border-gray-500'  
+            className='border-2 border-gray-500 w-full'  
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Notes:</label>
+          <label className='text-xl mr-4 text-gray-500'>Note:</label>
           <input 
             type="text"
             value={notes}
             onChange={(e) => setNotes([e.target.value])}
-            className='border-2 border-gray-500'  
+            className='border-2 border-gray-500 w-full'  
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveIssue}>
+        <button className='text-white bg-purple-900 hover:bg-sky-600 rounded-lg p-2 m-8' onClick={handleSaveIssue}>
           Save New Issue
         </button>
       </div>

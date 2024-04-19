@@ -6,7 +6,7 @@ const SearchBar = ({ setSearch }) => {
       <div className="flex justify-center items-center py-4 gap-x-4">
         <label className="text-xl">Search: </label>
         <input
-          className="border-2 border-sky-400 rounded-lg w-[50%]"
+          className="border-2 border-purple-400 rounded-lg w-[50%]"
           type="text"
           onChange={(e) => {
             setSearch(e.target.value);

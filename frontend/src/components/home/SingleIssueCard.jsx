@@ -15,37 +15,37 @@ const SingleIssueCard = ({ issue, index }) => {
   return (
     <div
     key={issue._id}
-    className="border-2 border-sky-400 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
+    className="border-2 border-purple-400 rounded-lg px-4 pt-10 m-4 relative hover:shadow-xl"
   >
-    <h2 className="absolute top-1 right-2 px-4 py-1 bg-gray-200 rounded-lg">
+    <h2 className="absolute top-1 right-2 px-4 py-1 bg-purple-400 rounded-lg text-white">
       {new Date(issue.createdAt).toLocaleDateString()}
     </h2>
 
     <div className="flex justify-start items-center gap-x-2">
-      <MdOutlineNumbers className="text-red-400 text-2xl" />
+      <MdOutlineNumbers className="text-purple-400 text-2xl" />
       <h2 className="my-1">{index + 1}</h2>
     </div>
 
     <div className="flex justify-start items-center gap-x-2">
-      <AiOutlineFolderOpen className="text-red-400 text-2xl" />
+      <AiOutlineFolderOpen className="text-purple-400 text-2xl" />
       <h2 className="my-1">{issue.title}</h2>
     </div>
 
     <div className="flex justify-start items-center gap-x-2">
-      <BiUserCircle className="text-red-400 text-2xl" />
+      <BiUserCircle className="text-purple-400 text-2xl" />
       <h2 className="my-1">{issue.author}</h2>
     </div>
 
     <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
-      <BiShow className='text-3xl text-blue-800 hover:text-black cursor-pointer' onClick={() => setShowModal(true)}/>
+      <BiShow className='text-3xl text-blue-800 hover:text-sky-600 cursor-pointer' onClick={() => setShowModal(true)}/>
       <Link to={`/issues/details/${issue._id}`}>
-        <BsInfoCircle className="text-2xl text-green-800 hover:text-black" />
+        <BsInfoCircle className="text-2xl text-green-800 hover:text-sky-600" />
       </Link>
       <Link to={`/issues/edit/${issue._id}`}>
-        <AiOutlineEdit className="text-2xl text-yellow-600 hover:text-black" />
+        <AiOutlineEdit className="text-2xl text-yellow-600 hover:text-sky-600" />
       </Link>
       <Link to={`/issues/delete/${issue._id}`}>
-        <MdOutlineDelete className="text-2xl text-red-600 hover:text-black" />
+        <MdOutlineDelete className="text-2xl text-red-600 hover:text-sky-600" />
       </Link>
     </div>
     {
